@@ -41,7 +41,8 @@ if len(sys.argv )==2:
             print("Key not found")
 
     elif command == "list":
-        pass
+        print(data)
+        
     else:
         print("Command not found")
 
