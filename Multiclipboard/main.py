@@ -19,7 +19,6 @@ def load_data(filepath):
         return {}
 
 
-
 # following commands let you save , update , load data from the clipboard 
 if len(sys.argv )==2:
     command = sys.argv[1]
@@ -39,10 +38,8 @@ if len(sys.argv )==2:
             print("Data copied from clipboard")
         else:
             print("Key not found")
-
     elif command == "list":
         print(data)
-        
     else:
         print("Command not found")
 
