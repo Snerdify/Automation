@@ -23,18 +23,25 @@ def load_data(filepath):
 # following commands let you save , update , load data from the clipboard 
 if len(sys.argv )==2:
     command = sys.argv[1]
+    data = load_data(DATA_JSON)
     if command =="save":
-        data = load_data(DATA_JSON)
+        
 #Save command should save the current clipboard content to a file as a value pair to 
 # a key that is provided by the user
         key = input("Enter the key for the clipboard data:")
         data[key] = clipboard.paste()
         save_data(DATA_JSON , data)
-
-
         print("Data Saved")
-    if command == "load":
-        print("Load")
+    elif command == "load":
+        key = input("Enter the key for the clipboard data:")
+        if key in data :
+            clipboard.copy(data[key])
+            print("Data copied from clipboard")
+        else:
+            print("Key not found")
+
+    elif command == "list":
+        pass
     else:
         print("Command not found")
 
