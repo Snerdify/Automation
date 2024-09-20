@@ -14,3 +14,5 @@ Get the api key by creating a free account on openweatherapi
 
 4. **Website Automater** : Helps users to store a list of urls they want automaticaly to load depending on the kind of mood they are in (ex. work or fun).
 Lets user run one line of code to open a list of urls corresponding to the domains.
+
+5. **Youtube Transcripts using Selenium** - 
