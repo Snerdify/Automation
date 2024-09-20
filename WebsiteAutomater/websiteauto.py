@@ -29,14 +29,18 @@ def open_urls(urls):
 
 # create a function that lets user decide what type of urls to open
 if __name__ == "__main__":
+    # by default this opens work if no set_name or wrong set_name is if provided
+    #open_urls(URLS["work"])
     set_name = sys.argv[1]
     if set_name in URLS:
         open_urls(URLS[set_name])
     else:
-        print("Set not found")
+        print("Set not found: Hence opening your work tabs by default")
+       
+        
     
    
 
 
-   
+
 

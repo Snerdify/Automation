@@ -1,7 +1,8 @@
 # Automation
 **Python Automation Projects**
 
-Executing Python automation projects based on level of difficulty . 
+Executing Python automation projects based on level of difficulty .
+
 1. Creating a program to read , update and save the data from the clipboard directly to a 
 json file . Lib used : paperclip/clipboard
 
@@ -9,5 +10,7 @@ json file . Lib used : paperclip/clipboard
 send request to a specific base url that fetches the current weather data for any major city in the world. Weather data will be loaded in json format which can be further manipulated to get the desired fields. 
 Get the api key by creating a free account on openweatherapi
 
-3. Email:
-4. Website Automater  
+3. **Email** : 
+
+4. **Website Automater** : Helps users to store a list of urls they want automaticaly to load depending on the kind of mood they are in (ex. work or fun).
+Lets user run one line of code to open a list of urls corresponding to the domains.
