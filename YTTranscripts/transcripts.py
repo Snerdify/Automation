@@ -82,6 +82,30 @@ def accept_terms_and_conditions(driver):
 # It ensures that the script can proceed without manual 
 # intervention.
 
+def get_transcripts(driver , mode):
+    driver.implicitly_wait(10)
+
+    if mode == 'headed':
+        try :
+            print('Accepting terms and conditons')
+            accept_terms_and_conditions(driver)
+        except:
+            print('No terms and conditions to accept')
+
+
+        # click on more actions to get to the transcript
+        print('Opening transcripts')
+        driver.find_element_by_xpath('//button[@aria-label="More Actions"]').click()
+        # click on opening the transcript
+        driver.find_element_by_xpath("//*[@id='items']/ytd-menu-service-item-renderer/tp-yt-paper-item").click()
+
+
+    print("Storing the transcript")
+    transcript_element = driver.find_element_by_xpath("//*[@id='body']/ytd-transcript-segment-list-renderer")
+    transcript = transcript_element.text
+
+
+
 
 
 
