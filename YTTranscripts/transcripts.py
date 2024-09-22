@@ -82,7 +82,7 @@ def accept_terms_and_conditions(driver):
 # It ensures that the script can proceed without manual 
 # intervention.
 
-def get_transcripts(driver , mode):
+def get_transcript(driver , mode):
     driver.implicitly_wait(10)
 
     if mode == 'headed':
@@ -99,10 +99,28 @@ def get_transcripts(driver , mode):
         # click on opening the transcript
         driver.find_element_by_xpath("//*[@id='items']/ytd-menu-service-item-renderer/tp-yt-paper-item").click()
 
+    if mode =="headless":
+        try:
+             driver.find_element_by_xpath('//button[@aria-label="More Actions"]').click()
+        except:
+            # either look for more actions and click or repeat the process by calling back the func
+            sleep(3)
+            driver.refresh()
+            get_transcript(driver, mode)
+
+        try:
+            # if the more actions button is clicked thne click on the transcript
+            driver.find_element_by_xpath("//*[@id='items']/ytd-menu-service-item-renderer/tp-yt-paper-item").click()
+        except:
+            # else call back the func and repeat the process
+            sleep(3)
+            driver.refresh()
+            get_transcript(driver, mode)
 
     print("Storing the transcript")
     transcript_element = driver.find_element_by_xpath("//*[@id='body']/ytd-transcript-segment-list-renderer")
     transcript = transcript_element.text
+    return transcript
 
 
 
