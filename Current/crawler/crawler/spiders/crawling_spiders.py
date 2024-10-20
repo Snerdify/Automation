@@ -11,6 +11,8 @@ class MySpider(CrawlSpider):
     allowed_domains = ["toscrape.com"]
     start_urls = ["https://books.toscrape.com/"]
 
+    PROXY_SERVER="107.181.161.133"
+
     # from the above start_urls we will extract the rules acc to rules 
     rules = (
         # extracts links matching - catalogue/category
@@ -24,7 +26,12 @@ class MySpider(CrawlSpider):
     def parse_item(self,response):
         # title , price and availability
         # use yield to generate 
-        
+        yield{
+            "title":response.css("h1::text").get(),
+            "price":response.css(".price_color::text").get(),
+            "availability":response.css(".availability::text")[1].get().replace("\n","").replace(" ",""),
+        }
+
 
 
 
