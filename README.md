@@ -3,7 +3,7 @@
 
 Executing Python automation projects based on level of difficulty .
 
-1. ***Clipboard-Automater** Creating a program to read , update and save the data from the clipboard directly to a 
+1. **Clipboard-Automater** Creating a program to read , update and save the data from the clipboard directly to a 
 json file . Lib used : paperclip/clipboard
 
 2. **Weather-Report-Generator** Use the openweatherapi(https://openweathermap.org/api) to get the API key and use it to 
