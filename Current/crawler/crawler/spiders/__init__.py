@@ -2,4 +2,8 @@
 #
 # Please refer to the documentation for information on how to create and manage
 # your spiders.
+
+
+# spiders - constructs that are used for actual web crawling.
+
 # 
