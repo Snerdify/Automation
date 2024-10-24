@@ -65,4 +65,25 @@ price = product_parent.select_one(".price").get_text()
 parent2 = soup.find(class_ = "post-1864")
 name = parent2.select_one(".woocommerce-loop-product__title").get_text()
 
-print(name)
+# print(name)
+
+url2= "https://www.scrapingcourse.com/ecommerce/product/abominable-hoodie/"
+
+resp2= requests.get(url2,headers=headers)
+#print(resp2.text)
+
+soup2 = BeautifulSoup(resp2.content , "html.parser")
+# print(soup2.prettify())
+
+# parent
+additional_info = soup2.select_one(".woocommerce-Tabs-panel--additional_information")
+
+# print(additional_info.prettify())
+# find the table element from the addtional info parent 
+table = additional_info.find("table")
+# print(table )
+
+for row in table.find_all('tr') :
+    category= row.find('th').get_text()
+    cat_value = row.find('td').get_text()
+    print(category,cat_value)
