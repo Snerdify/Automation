@@ -13,9 +13,8 @@ driver = webdriver.Chrome(options=options)
 
 # get the url
 driver.get("https://www.datacamp.com/users/sign_in")
-
 # wait for 15 sec for page to load 
-time.sleep(15)
+time.sleep(20)
 
 driver.take_screenshot("screenshot.png")
 
