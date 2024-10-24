@@ -37,10 +37,32 @@ soup = BeautifulSoup(response.content , "html.parser")
 # select the product search element 
 # find() - func enables you to select single HTML element from DOM
 product_search = soup.find(id="woocommerce-product-search-field-0")
-print(product_search)
+# print(product_search)
 # other ways to selecting elements - find("h1") , class_= " " , soup.find(attrs ={"name":"value"})
 
 # handling none objects 
 
 if product_search is None:
     placehoder_string = product_search['placeholder']
+
+# how to fetch nested elements 
+# 1. select the parent element 
+# 2. call bs4 search funcs on parent element 
+# 3. this limits the scope to only the children of the parent element
+
+
+# here the li tag which contains the product info doesnt have an id , 
+# select the parent element 
+product_parent = soup.find(class_="post-246")
+# lets print the price of the product- 69$
+price = product_parent.select_one(".price").get_text()
+
+# print(price)
+
+# product-name woocommerce-loop-product__title - class of name of next product
+
+# product class here is post-1864
+parent2 = soup.find(class_ = "post-1864")
+name = parent2.select_one(".woocommerce-loop-product__title").get_text()
+
+print(name)
