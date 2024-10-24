@@ -4,6 +4,8 @@ import requests
 # selectolax - alternative for BeautifulSoup
 # from selectolax.parser import HTMLParser
 from bs4 import BeautifulSoup
+import csv
+import json
   
 
 url = "https://www.scrapingcourse.com/ecommerce/"
@@ -86,4 +88,46 @@ table = additional_info.find("table")
 for row in table.find_all('tr') :
     category= row.find('th').get_text()
     cat_value = row.find('td').get_text()
-    print(category,cat_value)
+    # print(category,cat_value)
+
+# when iterating over multiple products store the data in a dict
+products=[]
+
+# fetch a list of products off of the website :
+product_elements = soup.select("li.product")
+for product_element in product_elements :
+    name = product_element.find("h2").get_text()
+    price= product_element.select_one(".amount").get_text()
+
+    new_product = {
+    "name": name , 
+    "price ": price , 
+    }
+
+
+    products.append(new_product)
+
+print(products)
+
+
+# export info to csv
+# 1. create products_csv file
+file = open('products_csv',"w", encoding = 'utf-8' , newline="")
+
+# 2. initialize a writer for your file
+
+writer = csv.writer(file)
+
+# convert product element to csv 
+for product in products:
+    writer.writerow(product.values())
+
+
+file.close()
+
+# json logic
+json_file = open("products_json","w")
+
+json.dump(products, json_file)
+
+json_file.close()
