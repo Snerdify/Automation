@@ -6,6 +6,8 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import json
+import time
+import pandas as pd
   
 
 url = "https://www.scrapingcourse.com/ecommerce/"
@@ -91,57 +93,82 @@ for row in table.find_all('tr') :
     # print(category,cat_value)
 
 # when iterating over multiple products store the data in a dict
-products=[]
+# products=[]
 
-# fetch a list of products off of the website :
-product_elements = soup.select("li.product")
-for product_element in product_elements :
-    name = product_element.find("h2").get_text()
-    price= product_element.select_one(".amount").get_text()
+# # fetch a list of products off of the website :
+# product_elements = soup.select("li.product")
+# for product_element in product_elements :
+#     name = product_element.find("h2").get_text()
+#     price= product_element.select_one(".amount").get_text()
 
-    new_product = {
-    "name": name , 
-    "price ": price , 
-    }
+#     new_product = {
+#     "name": name , 
+#     "price ": price , 
+#     }
 
 
-    products.append(new_product)
+#     products.append(new_product)
 
-print(products)
+# print(products)
 
 
 # HERE PAGINATION LOGIC CAN BE IMPLEMENTED - GET PRODUCT DATA FROM ALL PAGES 
 # url for 2nd page is - https://www.scrapingcourse.com/ecommerce/page/2/
-
+products=[]
 for x in range(1,13):
-    
-    url3 = " https://www.scrapingcourse.com/ecommerce/page/"
+
+    url3 = " https://www.scrapingcourse.com/ecommerce/page/" + str(x) +"/"
     response3 = requests.get(url3, headers=headers)
     soup = BeautifulSoup(response.content , "html.parser")
+   
+
+# fetch a list of products off of the website :
+    product_elements = soup.select("li.product")
+    for product_element in product_elements :
+        name = product_element.find("h2").get_text()
+        price= product_element.select_one(".amount").get_text()
+
+        new_product = {
+        "name": name , 
+        "price ": price , 
+        }
+
+
+        products.append(new_product)
+    print(len(products))
+    time.sleep(2)
+
+# print(products)
 
 
 
+# create a csv to store data of all 12 pages 
+
+df = pd.DataFrame(products)
+# print(df.head())
+
+df.to_csv('products.csv')
 
 
+# this is for single page file saving
+# # export info to csv
+# # 1. create products_csv file
+# file = open('products_csv',"w", encoding = 'utf-8' , newline="")
 
-# export info to csv
-# 1. create products_csv file
-file = open('products_csv',"w", encoding = 'utf-8' , newline="")
+# # 2. initialize a writer for your file
 
-# 2. initialize a writer for your file
+# writer = csv.writer(file)
 
-writer = csv.writer(file)
-
-# convert product element to csv 
-for product in products:
-    writer.writerow(product.values())
+# # convert product element to csv 
+# for product in products:
+#     writer.writerow(product.values())
 
 
-file.close()
+# file.close()
 
-# json logic
-json_file = open("products_json","w")
+# # json logic
+# json_file = open("products_json","w")
 
-json.dump(products, json_file)
+# json.dump(products, json_file)
 
-json_file.close()
+# json_file.close()

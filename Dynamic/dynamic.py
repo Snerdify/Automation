@@ -52,8 +52,5 @@ print(product_list)
 
 
 
-
-
 # CSS SELECTOR STRATEGY 
-
 driver.quit()
