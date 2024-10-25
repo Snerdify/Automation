@@ -110,6 +110,20 @@ for product_element in product_elements :
 print(products)
 
 
+# HERE PAGINATION LOGIC CAN BE IMPLEMENTED - GET PRODUCT DATA FROM ALL PAGES 
+# url for 2nd page is - https://www.scrapingcourse.com/ecommerce/page/2/
+
+for x in range(1,13):
+    
+    url3 = " https://www.scrapingcourse.com/ecommerce/page/"
+    response3 = requests.get(url3, headers=headers)
+    soup = BeautifulSoup(response.content , "html.parser")
+
+
+
+
+
+
 # export info to csv
 # 1. create products_csv file
 file = open('products_csv',"w", encoding = 'utf-8' , newline="")
