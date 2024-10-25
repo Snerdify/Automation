@@ -27,3 +27,15 @@ use selenium to access the chrome browser,search for a user selected YT url, get
 
 <sub> Level 2 Projects under the folder Current. </sub>
 
+Under folder current -
+1.  Crawler is a web crawler built  using scrapy
+2. Proxifing folder contains the logic for rotating proxies
+3. scripts - contains python code used for static website scraping using httpx , requests , bs4 / selectolax. 
+             The script for bypassing cloudfare security is in progress and is developed using selenium
+             mail.py - script for scraping dynamic websites containing js rendered projects 
+
+
+
+
+
+
