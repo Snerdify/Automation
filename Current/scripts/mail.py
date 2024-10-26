@@ -7,12 +7,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC 
+import time 
 
 url ="https://www.mailmodo.com/pricing/"
 headers = {
-     "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+     "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+     
 }
+time.sleep(3)
 resp = requests.get(url,headers=headers)
+time.sleep(2)
 soup = BeautifulSoup(resp.content, "html.parser")
 
 # initialize the headless chrome driver - runs in the background without opening a window 
@@ -30,12 +34,13 @@ driver = webdriver.Chrome(service=service , options=options)
 # )
 
 
-
 pricing_data =  soup.find('div' , class_ = "features_component__SE_Xi").get_text()
 # print(pricing_data)
 
+
 lite_plan = soup.find('div' , class_= "styles_pricecard__QJVmR").get_text()
 # print(lite_plan)
+
 
 cell_values = []
 table = soup.find('table')
@@ -48,8 +53,11 @@ for column in table.find_all('tr'):
             column_data.append("- Feature not available")
         else:
             column_data.append(cell.get_text(strip=True))
+
     cell_values.append(column_data)
+    time.sleep(2)
 print(cell_values)
+
 
 # after the js is rendered - print HTML 
 # print(driver.page_source)
