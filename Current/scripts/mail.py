@@ -41,9 +41,20 @@ pricing_data =  soup.find('div' , class_ = "features_component__SE_Xi").get_text
 # print(pricing_data)
 
 lite_plan = soup.find('div' , class_= "styles_pricecard__QJVmR").get_text()
-print(lite_plan)
+# print(lite_plan)
 
-lite_table = 
+
+cell_values = []
+table = soup.find('table')
+for column in table.find_all('tr'):
+    column_data = []
+    for cell in column.find_all('td'):
+        icon = cell.find('img')
+        if icon:
+            icon.decompose()
+        column_data.append(cell.get_text(strip=True))
+    cell_values.append(column_data)
+print(cell_values)
 
 # after the js is rendered - print HTML 
 # print(driver.page_source)
