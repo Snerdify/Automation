@@ -42,21 +42,33 @@ lite_plan = soup.find('div' , class_= "styles_pricecard__QJVmR").get_text()
 # print(lite_plan)
 
 
+# cell_values = []
+# table = soup.find('table')
+# for column in table.find_all('tr'):
+#     column_data = []
+#     for cell in column.find_all('td'):
+#         icon = cell.find('img')
+#         if icon:
+#             icon.decompose()
+#             # column_data.append("- Feature not available")
+#         column_data.append(cell.get_text(strip=True))
+
+#     cell_values.append(column_data)
+#     time.sleep(2)
+# print(cell_values)
 cell_values = []
 table = soup.find('table')
-for column in table.find_all('tr'):
-    column_data = []
-    for cell in column.find_all('td'):
-        icon = cell.find('img')
+for row in table.find_all('tr'):
+    row_data = []
+    for cell in row.find_all('td'):
+        icon = cell.find('img')  # Update with the actual icon tag if different
         if icon:
-            icon.decompose()
-            column_data.append("- Feature not available")
+            icon.decompose()  # Remove only the icon
+            cell_text = cell.get_text(strip=True)  # Retain text after the icon
+            row_data.append(f"- Feature not available: {cell_text}")
         else:
-            column_data.append(cell.get_text(strip=True))
-
-    cell_values.append(column_data)
-    time.sleep(2)
-print(cell_values)
+            row_data.append(cell.get_text(strip=True))  # Get cleaned text without surrounding whitespace
+    cell_values.append(row_data)
 
 
 # after the js is rendered - print HTML 
